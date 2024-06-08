@@ -1,12 +1,14 @@
 {
   "name": "js-cordyceps",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "repository": "github:stygian91/js-cordyceps",
   "main": "dist/cordyceps.es.js",
   "module": "dist/cordyceps.es.js",
   "unpkg": "dist/cordyceps.es.js",
   "scripts": {
+    "prepare": "npm run clean && npm run build",
+    "clean": "rimraf --glob dist/*",
     "build": "vite build",
     "test": "vitest run",
     "test:watch": "vitest watch"
@@ -14,6 +16,7 @@
   "author": "Styg",
   "license": "MIT",
   "devDependencies": {
+    "rimraf": "^5.0.7",
     "vite": "^5.2.13",
     "vitest": "^1.6.0"
   }
