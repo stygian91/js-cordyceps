@@ -1,0 +1,20 @@
+{
+  "name": "js-cordyceps",
+  "version": "0.1.0",
+  "description": "",
+  "repository": "github:stygian91/js-cordyceps",
+  "main": "dist/cordyceps.es.js",
+  "module": "dist/cordyceps.es.js",
+  "unpkg": "dist/cordyceps.es.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "vitest run",
+    "test:watch": "vitest watch"
+  },
+  "author": "Styg",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.2.13",
+    "vitest": "^1.6.0"
+  }
+}
