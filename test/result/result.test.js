@@ -52,26 +52,21 @@ describe('result', () => {
 
   test('andThen', () => {
     const res = Result.try(thrower);
-    const res2 = Result.try(() => 42);
-    const res3 = Result.try(() => 69);
+    const res2 = Result.makeOk(42);
+    const cb = x => Result.makeOk(x + 69);
 
-    expectError(res.andThen(() => res2));
-    expectError(res2.andThen(() => res));
-
-    expect(res2.andThen(() => res3).unwrap()).toEqual(69);
-    expect(res3.andThen(() => res2).unwrap()).toEqual(42);
+    expectError(res.andThen(cb));
+    expect(res2.andThen(cb).unwrap()).toEqual(111);
 
     let outside = 1;
-    res.andThen(() => {
+    res.andThen((x) => {
       outside++;
-      return res2;
+      return Result.makeOk(x + 1);
     });
-
     expect(outside).toEqual(1);
 
     expectError(res);
     expect(res2.unwrap()).toEqual(42);
-    expect(res3.unwrap()).toEqual(69);
   });
 
   test('or', () => {

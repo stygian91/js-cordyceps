@@ -41,17 +41,17 @@ describe("option", () => {
     const opt2 = Option.make(1);
 
     expect(opt.andThen(() => Option.makeNone()).isNone()).toEqual(true);
-    expect(opt.andThen(() => Option.make(2)).isNone()).toEqual(true);
+    expect(opt.andThen((x) => Option.make(x + 1)).isNone()).toEqual(true);
 
     expect(opt2.andThen(() => Option.makeNone()).isNone()).toEqual(true);
-    expect(opt2.andThen(() => Option.make(2)).isSome()).toEqual(true);
-    expect(opt2.andThen(() => Option.make(2)).unwrap()).toEqual(2);
+    expect(opt2.andThen((x) => Option.make(x + 1)).isSome()).toEqual(true);
+    expect(opt2.andThen((x) => Option.make(x + 1)).unwrap()).toEqual(2);
 
     // check if the cb is only called if the option is some
     let outside = 1;
-    opt.andThen(() => {
+    opt.andThen((x) => {
       outside++;
-      return Option.make(2);
+      return Option.make(x + 1);
     });
     expect(outside).toEqual(1);
 

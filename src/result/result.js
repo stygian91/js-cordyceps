@@ -75,8 +75,11 @@ class Result {
     return this.isErr() ? this : other;
   }
 
+  /**
+   * @returns {Result}
+   */
   andThen(otherCb) {
-    return this.isErr() ? this : otherCb();
+    return this.isErr() ? this : otherCb(this.unwrap());
   }
 }
 
