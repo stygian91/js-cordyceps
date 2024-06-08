@@ -1,8 +1,9 @@
 {
   "name": "js-cordyceps",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "repository": "github:stygian91/js-cordyceps",
+  "type": "module",
   "main": "dist/cordyceps.es.js",
   "module": "dist/cordyceps.es.js",
   "unpkg": "dist/cordyceps.es.js",
