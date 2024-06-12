@@ -137,4 +137,15 @@ describe('result', () => {
     expectError(res);
     expect(res2.unwrap()).toEqual(42);
   });
+
+  test('match', () => {
+    const res = Result.try(thrower);
+    const res2 = Result.try(() => 42);
+
+    expect(res.match(x => x + 1, err => err.message.toUpperCase())).toEqual('EXAMPLE');
+    expect(res2.match(x => x + 1, err => err.message.toUpperCase())).toEqual(43);
+
+    expectError(res);
+    expect(res2.unwrap()).toEqual(42);
+  });
 });

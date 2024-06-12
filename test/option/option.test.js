@@ -124,5 +124,16 @@ describe("option", () => {
     expect(opt.unwrap()).toEqual(null);
     expect(opt2.unwrap()).toEqual(1);
   });
+
+  test('match', () => {
+    const opt = Option.make(null);
+    const opt2 = Option.make(1);
+
+    expect(opt.match(x => x + 1, () => 69)).toEqual(69);
+    expect(opt2.match(x => x + 1, () => 69)).toEqual(2);
+
+    expect(opt.unwrap()).toEqual(null);
+    expect(opt2.unwrap()).toEqual(1);
+  });
 });
 

@@ -81,6 +81,10 @@ class Result {
   andThen(otherCb) {
     return this.isErr() ? this : otherCb(this.unwrap());
   }
+
+  match(onOk, onErr) {
+    return this.isOk() ? onOk(this.unwrap()) : onErr(this.unwrap());
+  }
 }
 
 export default Result;

@@ -80,6 +80,10 @@ class Maybe {
 
     return andCb(this.#wrapped.getValue());
   }
+
+  match(onSome, onNone) {
+    return this.isSome() ? onSome(this.unwrap()) : onNone();
+  }
 }
 
 export default Maybe;
