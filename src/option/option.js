@@ -5,21 +5,30 @@ class Maybe {
   #wrapped;
 
   /**
-   * @param {Some|None} inner 
+   * @param {Some|None} inner
    */
   constructor(inner) {
     this.#wrapped = inner;
   }
 
+  /**
+   * @returns {Maybe}
+   */
   static make(value) {
     const isNil = (typeof value === 'undefined' || value === null)
     return isNil ? Maybe.makeNone() : Maybe.makeSome(value);
   }
 
+  /**
+   * @returns {Maybe}
+   */
   static makeSome(value) {
     return new Maybe(new Some(value))
   }
 
+  /**
+   * @returns {Maybe}
+   */
   static makeNone() {
     return new Maybe(new None);
   }
@@ -44,6 +53,9 @@ class Maybe {
     return this.isSome() ? this.#wrapped.getValue() : otherCb();
   }
 
+  /**
+   * @returns {Maybe}
+   */
   map(mapCb) {
     if (this.isNone()) {
       return this;
@@ -73,6 +85,9 @@ class Maybe {
     return this.isNone() ? this : other;
   }
 
+  /**
+   * @returns {Maybe}
+   */
   andThen(andCb) {
     if (this.isNone()) {
       return this;

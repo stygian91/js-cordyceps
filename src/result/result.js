@@ -12,6 +12,9 @@ class Result {
     this.#wrapped = value;
   }
 
+  /**
+   * @returns {Result}
+   */
   static try(fn, args = []) {
     try {
       const fnRes = fn(...args);
@@ -21,10 +24,16 @@ class Result {
     }
   }
 
+  /**
+   * @returns {Result}
+   */
   static makeErr(err) {
     return new Result(new Err(err));
   }
 
+  /**
+   * @returns {Result}
+   */
   static makeOk(value = null) {
     return new Result(new Ok(value));
   }
@@ -49,6 +58,9 @@ class Result {
     return this.isOk() ? this.unwrap() : otherCb();
   }
 
+  /**
+   * @returns {Result}
+   */
   map(mapCb) {
     if (this.isOk()) {
       return Result.makeOk(mapCb(this.unwrap()));
@@ -64,6 +76,9 @@ class Result {
     return this.isOk() ? this : other;
   }
 
+  /**
+   * @returns {Result}
+   */
   orElse(otherCb) {
     return this.isOk() ? this : otherCb();
   }
