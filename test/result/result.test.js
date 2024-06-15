@@ -1,3 +1,4 @@
+import { flipResultList } from '../../src/result/functions';
 import Result from '../../src/result/result'
 import { expect, test, describe } from 'vitest';
 
@@ -147,5 +148,19 @@ describe('result', () => {
 
     expectError(res);
     expect(res2.unwrap()).toEqual(42);
+  });
+
+  test('flipResultList', () => {
+    const res = Result.try(thrower);
+    const res2 = Result.try(() => 42);
+    const res3 = Result.try(() => 69);
+
+    expectError(flipResultList([res, res2]));
+    expect(flipResultList([res2, res3]).isOk()).toEqual(true);
+    expect(flipResultList([res2, res3]).unwrap()).toEqual([42, 69]);
+
+    expectError(res);
+    expect(res2.unwrap()).toEqual(42);
+    expect(res3.unwrap()).toEqual(69);
   });
 });

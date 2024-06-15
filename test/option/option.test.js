@@ -1,4 +1,5 @@
 import Option from '../../src/option/option'
+import { flipOptionList } from '../../src/option/functions';
 import { expect, test, describe } from 'vitest';
 
 describe("option", () => {
@@ -134,6 +135,20 @@ describe("option", () => {
 
     expect(opt.unwrap()).toEqual(null);
     expect(opt2.unwrap()).toEqual(1);
+  });
+
+  test('flipOptionList', () => {
+    const opt1 = Option.make(null);
+    const opt2 = Option.make(1);
+    const opt3 = Option.make(2);
+
+    expect(flipOptionList([opt1, opt2]).isNone()).toEqual(true);
+    expect(flipOptionList([opt2, opt3]).isSome()).toEqual(true);
+    expect(flipOptionList([opt2, opt3]).unwrap()).toEqual([1, 2]);
+
+    expect(opt1.unwrap()).toEqual(null);
+    expect(opt2.unwrap()).toEqual(1);
+    expect(opt3.unwrap()).toEqual(2);
   });
 });
 
